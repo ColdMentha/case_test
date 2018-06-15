@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 )
 
-var count int=0
-
 func test() int {
 	
 	var a, b int = 0, 1
@@ -24,14 +22,12 @@ func test() int {
 
 
 	for i:=0;i < len(mas);i++ {
-		fmt.Print("Enter number ",i+1,":")
-			fmt.Scan(&k)
 		intB,_:=json.Marshal(i)
-
-
+		fmt.Print("Enter number ",i+1,":")
+		fmt.Scan(&k)
 		if k!=mas[i] {
 			fmt.Println("Правильный число:", mas[i], " - порядковый номер ", string(intB))
-			count++
+			
 		}
 
 	}
@@ -41,5 +37,4 @@ func test() int {
 func main() {
 
 	test()
-
 }
