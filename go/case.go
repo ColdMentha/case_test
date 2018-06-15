@@ -23,7 +23,7 @@ func test() int {
 
 	for i:=0;i < len(mas);i++ {
 		intB,_:=json.Marshal(i)
-		fmt.Print("Enter number ",i+1,":")
+		fmt.Print("Enter number ",i,":")
 		fmt.Scan(&k)
 		if k!=mas[i] {
 			fmt.Println("Правильный число:", mas[i], " - порядковый номер ", string(intB))
