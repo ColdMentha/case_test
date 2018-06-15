@@ -1,0 +1,21 @@
+//1 
+SELECT world.country.Name
+FROM world.country 
+join world.city on world.country.Capital = world.city.ID
+order by world.city.Population desc
+limit 5;
+
+//2 
+SELECT sum(world.country.Population) 
+FROM world.country
+join world.countrylanguage on world.country.Code = world.countrylanguage.CountryCode
+where world.countrylanguage.Language = 'English';
+
+//3
+SELECT world.countrylanguage.CountryCode
+
+FROM world.countrylanguage 
+
+group by world.countrylanguage.CountryCode
+having sum(world.countrylanguage.IsOfficial = 'T' )>=2 
+and sum(world.countrylanguage.IsOfficial = 'F') / sum(world.countrylanguage.IsOfficial='T')>=2;

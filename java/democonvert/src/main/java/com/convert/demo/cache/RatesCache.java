@@ -1,0 +1,34 @@
+package com.convert.demo.cache;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
+
+@Component
+public class RatesCache {
+
+	@Value("${cache.expiry}")
+	private int CACHE_DURATION;
+
+	private Cache<String, BigDecimal> cache;
+
+	@PostConstruct
+	public void init() {
+		if (cache == null) {					
+			cache = CacheBuilder.newBuilder().expireAfterWrite(CACHE_DURATION, TimeUnit.MINUTES).build();
+		}
+	}
+
+	public BigDecimal getCachedRate(String code) {
+		return cache.getIfPresent(code);
+	}
+
+	public void cacheRate(String code, BigDecimal rate) {
+		cache.put(code, rate);
+	}
+}
